@@ -1,8 +1,0 @@
-  {
-  "repo": "https://github.com/libraryaddict/KolMallHistory/branches/release/", 
-  "author": "Irrat", 
-  "name": "MallHistory", 
-  "shortDesc": "Library to fetch mall history", 
-  "category": "library", 
-  "longDesc": "This script is intended as a library to fetch mall history, the amount sold of X and the price point."
- },
