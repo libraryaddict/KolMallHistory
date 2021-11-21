@@ -35,5 +35,6 @@ jobs:
           mkdir -p scripts/utils
           mv dist/MallHistory.js scripts/utils/mallhistory.js
           git add scripts/
+          rm -r dist/
           git commit -m "Build Mafia files for commit $GITHUB_SHA"
           git push origin release
