@@ -33,7 +33,7 @@ jobs:
           git switch release
           rm -r scripts/
           mkdir -p scripts/utils
-          mv dist/mallhistory.js scripts/utils/mallhistory.js
+          mv dist/MallHistory.js scripts/utils/mallhistory.js
           git add scripts/
           git commit -m "Build Mafia files for commit $GITHUB_SHA"
           git push origin release

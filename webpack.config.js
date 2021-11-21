@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    mallhistory: "./src/MallHistory.ts",
+    MallHistory: "./src/MallHistory.ts",
   },
   mode: "production",
   module: {
