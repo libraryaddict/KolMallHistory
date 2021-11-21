@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    mallhistory: "./src/MallHistory.ts"
+    mallhistory: "./src/MallHistory.ts",
   },
   mode: "production",
   module: {
@@ -20,7 +20,7 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
-    path: path.join(__dirname, "./built/scripts/utils/"),
+    path: path.join(__dirname, "./dist/"),
     libraryTarget: "commonjs",
   },
   externals: {

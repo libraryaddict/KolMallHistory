@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "rootDir": "src",
     "experimentalDecorators": true,
     "allowUnreachableCode": true,
@@ -14,9 +15,9 @@
     "strict": false,
     "target": "esnext",
     "useDefineForClassFields": true,
-    "outDir": "../scripts/mine", // Ensure that .d.ts files are created by tsc, but not .js files
+    "outDir": "dist", // Ensure that .d.ts files are created by tsc, but not .js files
     // Ensure that Babel can safely transpile files in the TypeScript project
-    "isolatedModules": true,
+    "isolatedModules": true
   },
   "include": ["src/**/*.ts"]
 }
