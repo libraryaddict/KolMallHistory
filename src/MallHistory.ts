@@ -7,9 +7,18 @@ import {
   visitUrl,
 } from "kolmafia";
 
-class MallRecord {
+export class MallRecord {
+  /**
+   * Seconds since epoch
+   */
   date: number;
+  /**
+   * Amount purchased in this record
+   */
   amount: number;
+  /**
+   * Amount each item was purchased for
+   */
   meat: number;
 
   constructor(date: number, amount: number, meat: number) {
@@ -19,11 +28,14 @@ class MallRecord {
   }
 }
 
-class MallRecords {
+export class MallRecords {
   records: MallRecord[] = [];
+  /**
+   * Being seconds since epoch
+   */
   lastUpdated: number = 0;
 
-  constructor(jsonObject?) {
+  constructor(jsonObject?: any) {
     if (jsonObject == null) return;
 
     this.lastUpdated = jsonObject.lastUpdated;
@@ -35,21 +47,43 @@ class MallRecords {
     }
   }
 
-  getRecords(days: number): MallRecord[] {
-    let cutoff = this.lastUpdated - days * 60 * 60 * 24;
+  getRecords(overPeriodOfDays: number): MallRecord[] {
+    let cutoff = this.lastUpdated - overPeriodOfDays * 60 * 60 * 24;
 
     return this.records.filter((r) => r.date >= cutoff);
+  }
+
+  getAmountSold(overPeriodOfDays: number): number {
+    return this.getRecords(overPeriodOfDays)
+      .map((record) => record.amount)
+      .reduce((a, b) => a + b, 0);
+  }
+
+  getPriceSold(overPeriodOfDays: number): number {
+    let amount = this.getRecords(overPeriodOfDays)
+      .map((record) => record.amount)
+      .reduce((a, b) => a + b, 0);
+
+    if (amount == 0) {
+      return 0;
+    }
+
+    let totalPrice = this.getRecords(overPeriodOfDays)
+      .map((record) => record.meat * record.amount)
+      .reduce((a, b) => a + b, 0);
+
+    return Math.round(totalPrice / amount);
   }
 }
 
 enum MallAge {
   HOURS_12 = 5,
   DAY = 1,
+  HOURS_48 = 6,
   WEEK = 2,
+  WEEKS_2 = 7,
   MONTH = 3,
   ALL = 4,
-  HOURS_48 = 6,
-  WEEKS_2 = 7,
 }
 
 class MallUpdater {
@@ -162,7 +196,7 @@ export class MallHistory {
     bufferToFile(JSON.stringify(jsonObj), "mallhistory.txt");
   }
 
-  private ensureUpToDate(item: Item, daysToCheck: number) {
+  ensureUpToDate(item: Item, maxDaysOld: number): MallRecords {
     let records: MallRecords = this.items.get(item);
 
     if (records == null) {
@@ -172,63 +206,54 @@ export class MallHistory {
 
     let currentDate = new Date().getTime() / 1000;
 
-    if (records.lastUpdated < currentDate - 7 * 24 * 60 * 60) {
-      new MallUpdater().updateMallRecords(item, records, MallAge.MONTH);
+    if (records.lastUpdated < currentDate - maxDaysOld * 24 * 60 * 60) {
+      new MallUpdater().updateMallRecords(
+        item,
+        records,
+        maxDaysOld > 30 ? MallAge.ALL : MallAge.MONTH
+      );
 
       this.saveMallItems();
     }
+
+    return records;
   }
 
   getMallRecords(
     item: Item,
-    daysToCheck: number,
-    maxDaysOldData: number = 7
-  ): MallRecord[] {
-    this.ensureUpToDate(item, maxDaysOldData);
+    maxDaysOldData: number = 7,
+    updateIfMissing: boolean = true
+  ): MallRecords {
+    if (!updateIfMissing) {
+      return this.items.get(item);
+    }
 
-    let records: MallRecords = this.items.get(item);
+    if (!this.items.has(item)) {
+      return this.ensureUpToDate(item, Math.max(1, maxDaysOldData));
+    } else if (maxDaysOldData > 0) {
+      return this.ensureUpToDate(item, maxDaysOldData);
+    }
 
-    return records.getRecords(daysToCheck);
+    return this.items.get(item);
   }
 
   getAmountSold(
     item: Item,
-    daysToCheck: number,
+    overPeriodOfDays: number,
     maxDaysOldData: number = 7
   ): number {
-    this.ensureUpToDate(item, maxDaysOldData);
+    let records: MallRecords = this.ensureUpToDate(item, maxDaysOldData);
 
-    let records: MallRecords = this.items.get(item);
-
-    return records
-      .getRecords(daysToCheck)
-      .map((record) => record.amount)
-      .reduce((a, b) => a + b, 0);
+    return records.getAmountSold(overPeriodOfDays);
   }
 
   getPriceSold(
     item: Item,
-    daysToCheck: number,
+    overPeriodOfDays: number,
     maxDaysOldData: number = 7
   ): number {
-    this.ensureUpToDate(item, maxDaysOldData);
+    let records: MallRecords = this.ensureUpToDate(item, maxDaysOldData);
 
-    let records: MallRecords = this.items.get(item);
-
-    let amount = records
-      .getRecords(daysToCheck)
-      .map((record) => record.amount)
-      .reduce((a, b) => a + b, 0);
-
-    if (amount == 0) {
-      return 0;
-    }
-
-    let totalPrice = records
-      .getRecords(daysToCheck)
-      .map((record) => record.meat * record.amount)
-      .reduce((a, b) => a + b, 0);
-
-    return Math.round(totalPrice / amount);
+    return records.getPriceSold(overPeriodOfDays);
   }
 }
