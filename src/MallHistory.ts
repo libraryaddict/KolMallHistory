@@ -26,6 +26,10 @@ export class MallRecord {
     this.amount = amount;
     this.meat = meat;
   }
+
+  getDaysOld(): number {
+    return (Date.now() / 1000 - this.date) / (60 * 60 * 24);
+  }
 }
 
 export class MallRecords {
@@ -74,6 +78,10 @@ export class MallRecords {
 
     return Math.round(totalPrice / amount);
   }
+
+  getDaysOld(): number {
+    return (Date.now() / 1000 - this.lastUpdated) / (60 * 60 * 24);
+  }
 }
 
 enum MallAge {
@@ -87,7 +95,7 @@ enum MallAge {
 }
 
 class MallUpdater {
-  parseMallRecord(line: string): MallRecord {
+  parseOldMallRecord(line: string): MallRecord {
     let dateString: string = line.substring(2, line.indexOf(": "));
     let amount: number = toInt(
       line.substring(line.indexOf(": ") + 2, line.indexOf(" bought"))
@@ -132,29 +140,36 @@ class MallUpdater {
     return new MallRecord(date / 1000, amount, price);
   }
 
+  parseNewMallRecord(match: string[]): MallRecord {
+    return new MallRecord(toInt(match[3]), toInt(match[2]), toInt(match[1]));
+  }
+
   parseMallRecords(buffer: string): MallRecord[] {
     let records: MallRecord[] = [];
 
     for (let line of buffer.replace("\r", "").split("\n")) {
-      if (!line.startsWith("* ")) {
+      let match = line.match(
+        /<!-- Item \d+ bought @ price (\d+), (\d+) copies, at (\d+) -->/
+      );
+
+      if (match == null) {
         continue;
       }
 
-      records[records.length] = this.parseMallRecord(line);
+      records[records.length] = this.parseNewMallRecord(match);
     }
 
     return records;
   }
 
-  updateMallRecords(item: Item, records: MallRecords, mallAge: MallAge) {
+  updateMallRecords(item: Item, records: MallRecords) {
     print("Updating mall history for " + item);
 
     let mallRecords: MallRecord[] = this.parseMallRecords(
       visitUrl(
-        "https://kol.coldfront.net/newmarket/translist.php?itemid=" +
+        "https://kol.coldfront.net/newmarket/itemgraph.php?itemid=" +
           toInt(item) +
-          "&timespan=" +
-          mallAge
+          "&timespan=4"
       )
     );
 
@@ -207,11 +222,7 @@ export class MallHistory {
     let currentDate = new Date().getTime() / 1000;
 
     if (records.lastUpdated < currentDate - maxDaysOld * 24 * 60 * 60) {
-      new MallUpdater().updateMallRecords(
-        item,
-        records,
-        maxDaysOld > 30 ? MallAge.ALL : MallAge.MONTH
-      );
+      new MallUpdater().updateMallRecords(item, records);
 
       this.saveMallItems();
     }
