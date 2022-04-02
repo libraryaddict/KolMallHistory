@@ -5,6 +5,7 @@ import {
   toInt,
   toItem,
   visitUrl,
+  Item,
 } from "kolmafia";
 
 export class MallRecord {

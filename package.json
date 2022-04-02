@@ -1,6 +1,6 @@
 {
   "name": "kol-mallhistory",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "main": "dist/MallHistory.js",
   "types": "dist/MallHistory.d.ts",
@@ -28,6 +28,6 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "kolmafia": "^1.2.1"
+    "kolmafia": "2.1.1"
   }
 }
