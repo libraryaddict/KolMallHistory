@@ -217,8 +217,9 @@ MallUpdater = /*#__PURE__*/function () {function MallUpdater() {_classCallCheck(
 
       var lastDate = records.records.length > 0 ? records.records[0].date : 0;
 
-      (_records$records = records.records).unshift.apply(_records$records, _toConsumableArray(mallRecords.filter((r) => r.date > lastDate)));
+      (_records$records = records.records).push.apply(_records$records, _toConsumableArray(mallRecords.filter((r) => r.date > lastDate)));
       records.lastUpdated = new Date().getTime() / 1000;
+      records.records.sort((r1, r2) => r1.date - r2.date);
     } }]);return MallUpdater;}();
 
 
@@ -239,7 +240,10 @@ var MallHistory = /*#__PURE__*/function () {
       var obj = JSON.parse(string);var _iterator3 = _createForOfIteratorHelper(
 
       obj),_step3;try {for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {var array = _step3.value;
-          this.items.set((0,external_kolmafia_namespaceObject.toItem)(array[0]), new MallRecords(array[1]));
+          var records = new MallRecords(array[1]);
+          records.records.sort((r1, r2) => r1.date - r2.date);
+
+          this.items.set((0,external_kolmafia_namespaceObject.toItem)(array[0]), records);
         }} catch (err) {_iterator3.e(err);} finally {_iterator3.f();}
     } }, { key: "saveMallItems", value:
 
