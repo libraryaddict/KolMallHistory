@@ -176,8 +176,9 @@ class MallUpdater {
 
     let lastDate = records.records.length > 0 ? records.records[0].date : 0;
 
-    records.records.unshift(...mallRecords.filter((r) => r.date > lastDate));
+    records.records.push(...mallRecords.filter((r) => r.date > lastDate));
     records.lastUpdated = new Date().getTime() / 1000;
+    records.records.sort((r1, r2) => r1.date - r2.date);
   }
 }
 
@@ -198,7 +199,10 @@ export class MallHistory {
     let obj = JSON.parse(string);
 
     for (let array of obj) {
-      this.items.set(toItem(<number>array[0]), new MallRecords(array[1]));
+      let records = new MallRecords(array[1]);
+      records.records.sort((r1, r2) => r1.date - r2.date);
+
+      this.items.set(toItem(<number>array[0]), records);
     }
   }
 
