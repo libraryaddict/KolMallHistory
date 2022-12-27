@@ -47,7 +47,7 @@ __webpack_require__.d(__webpack_exports__, {
 ;// CONCATENATED MODULE: external "kolmafia"
 const external_kolmafia_namespaceObject = require("kolmafia");
 ;// CONCATENATED MODULE: ./src/MallHistory.ts
-function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _createForOfIteratorHelper(o, allowArrayLike) {var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];if (!it) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = it.call(o);}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);Object.defineProperty(Constructor, "prototype", { writable: false });return Constructor;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _createForOfIteratorHelper(o, allowArrayLike) {var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];if (!it) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = it.call(o);}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];return arr2;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);Object.defineProperty(Constructor, "prototype", { writable: false });return Constructor;}function _defineProperty(obj, key, value) {key = _toPropertyKey(key);if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toPropertyKey(arg) {var key = _toPrimitive(arg, "string");return typeof key === "symbol" ? key : String(key);}function _toPrimitive(input, hint) {if (typeof input !== "object" || input === null) return input;var prim = input[Symbol.toPrimitive];if (prim !== undefined) {var res = prim.call(input, hint || "default");if (typeof res !== "object") return res;throw new TypeError("@@toPrimitive must return a primitive value.");}return (hint === "string" ? String : Number)(input);}
 
 var MallRecord = /*#__PURE__*/function () {
   /**
@@ -82,15 +82,15 @@ var MallRecords = /*#__PURE__*/function () {
 
 
   function MallRecords(jsonObject) {_classCallCheck(this, MallRecords);_defineProperty(this, "records", []);_defineProperty(this, "lastUpdated", 0);
-    if (jsonObject == null) return;
+    if (jsonObject == null) {
+      return;
+    }
 
-    this.lastUpdated = jsonObject.lastUpdated;var _iterator = _createForOfIteratorHelper(
+    this.lastUpdated = jsonObject.lastUpdated;
 
-    jsonObject.records),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var record = _step.value;
-        this.records.push(
-        new MallRecord(record.date, record.amount, record.meat));
+    this.records = jsonObject.records.map(
+    (r) => new MallRecord(r.date, r.amount, r.meat));
 
-      }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
   }_createClass(MallRecords, [{ key: "getRecords", value:
 
     function getRecords(overPeriodOfDays) {
@@ -179,7 +179,7 @@ MallUpdater = /*#__PURE__*/function () {function MallUpdater() {_classCallCheck(
 
       }
 
-      return new MallRecord(date / 1000, amount, price);
+      return new MallRecord(Math.round(date / 1000), amount, price);
     } }, { key: "parseNewMallRecord", value:
 
     function parseNewMallRecord(match) {
@@ -187,9 +187,9 @@ MallUpdater = /*#__PURE__*/function () {function MallUpdater() {_classCallCheck(
     } }, { key: "parseMallRecords", value:
 
     function parseMallRecords(buffer) {
-      var records = [];var _iterator2 = _createForOfIteratorHelper(
+      var records = [];var _iterator = _createForOfIteratorHelper(
 
-      buffer.replace("\r", "").split("\n")),_step2;try {for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {var line = _step2.value;
+        buffer.replace("\r", "").split("\n")),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var line = _step.value;
           var match = line.match(
           /<!-- Item \d+ bought @ price (\d+), (\d+) copies, at (\d+) -->/);
 
@@ -199,7 +199,7 @@ MallUpdater = /*#__PURE__*/function () {function MallUpdater() {_classCallCheck(
           }
 
           records[records.length] = this.parseNewMallRecord(match);
-        }} catch (err) {_iterator2.e(err);} finally {_iterator2.f();}
+        }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
 
       return records;
     } }, { key: "updateMallRecords", value:
@@ -218,7 +218,7 @@ MallUpdater = /*#__PURE__*/function () {function MallUpdater() {_classCallCheck(
       var lastDate = records.records.length > 0 ? records.records[0].date : 0;
 
       (_records$records = records.records).push.apply(_records$records, _toConsumableArray(mallRecords.filter((r) => r.date > lastDate)));
-      records.lastUpdated = new Date().getTime() / 1000;
+      records.lastUpdated = Math.round(new Date().getTime() / 1000);
       records.records.sort((r1, r2) => r1.date - r2.date);
     } }]);return MallUpdater;}();
 
@@ -237,22 +237,33 @@ var MallHistory = /*#__PURE__*/function () {
         return;
       }
 
-      var obj = JSON.parse(string);var _iterator3 = _createForOfIteratorHelper(
+      var obj = JSON.parse(string);var _iterator2 = _createForOfIteratorHelper(
 
-      obj),_step3;try {for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {var array = _step3.value;
+        obj),_step2;try {for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {var array = _step2.value;
           var records = new MallRecords(array[1]);
-          records.records.sort((r1, r2) => r1.date - r2.date);
 
-          this.items.set((0,external_kolmafia_namespaceObject.toItem)(array[0]), records);
-        }} catch (err) {_iterator3.e(err);} finally {_iterator3.f();}
+          if (
+          records.records.length > 1 &&
+          records.records[0].date >
+          records.records[records.records.length - 1].date)
+          {
+            records.records.sort((r1, r2) => r1.date - r2.date);
+          }
+
+          if (array[0] < 0) {
+            continue;
+          }
+
+          this.items.set(external_kolmafia_namespaceObject.Item.get(array[0]), records);
+        }} catch (err) {_iterator2.e(err);} finally {_iterator2.f();}
     } }, { key: "saveMallItems", value:
 
     function saveMallItems() {
-      var jsonObj = [];var _iterator4 = _createForOfIteratorHelper(
+      var jsonObj = [];var _iterator3 = _createForOfIteratorHelper(
 
-      this.items),_step4;try {for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {var entry = _step4.value;
+        this.items),_step3;try {for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {var entry = _step3.value;
           jsonObj[jsonObj.length] = [(0,external_kolmafia_namespaceObject.toInt)(entry[0]), entry[1]];
-        }} catch (err) {_iterator4.e(err);} finally {_iterator4.f();}
+        }} catch (err) {_iterator3.e(err);} finally {_iterator3.f();}
 
       (0,external_kolmafia_namespaceObject.bufferToFile)(JSON.stringify(jsonObj), "mallhistory.txt");
     } }, { key: "ensureUpToDate", value:
