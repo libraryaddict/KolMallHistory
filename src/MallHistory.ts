@@ -147,7 +147,7 @@ class MallUpdater {
   parseMallRecords(buffer: string): MallRecord[] {
     const records: MallRecord[] = [];
 
-    for (const line of buffer.replace("\r", "").split("\n")) {
+    for (const line of buffer.split(/(\n|\r)+/)) {
       const match = line.match(
         /<!-- Item \d+ bought @ price (\d+), (\d+) copies, at (\d+) -->/
       );
